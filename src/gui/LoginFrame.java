@@ -16,6 +16,7 @@ public class LoginFrame extends JFrame {
     private JComboBox<String> userTypeCombo;
     private CustomerService customerService;
     private RestaurantService restaurantService;
+    private JButton loginButton; // Store reference to login button
 
     public LoginFrame() {
         this.customerService = new CustomerService();
@@ -35,6 +36,7 @@ public class LoginFrame extends JFrame {
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         userTypeCombo = new JComboBox<>(new String[]{"Customer", "Restaurant", "Delivery"});
+        loginButton = new JButton("Login"); // Initialize login button here
     }
 
     private void setupLayout() {
@@ -66,7 +68,6 @@ public class LoginFrame extends JFrame {
 
         // Buttons
         JPanel buttonPanel = new JPanel();
-        JButton loginButton = new JButton("Login");
         JButton registerButton = new JButton("Register");
 
         buttonPanel.add(loginButton);
@@ -81,13 +82,8 @@ public class LoginFrame extends JFrame {
     }
 
     private void setupEventHandlers() {
-        // Enter key support
-        getRootPane().setDefaultButton(findLoginButton());
-    }
-
-    private JButton findLoginButton() {
-        // Find login button for Enter key support
-        return (JButton) ((JPanel) getContentPane().getComponent(4)).getComponent(0);
+        // Enter key support - now we have a direct reference to loginButton
+        getRootPane().setDefaultButton(loginButton);
     }
 
     private void handleLogin() {
